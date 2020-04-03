@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace NinjaCsv
 {
     public class CsvParser
     {
-        private string _filePath;
-        private string _delimiter;
-
-        public CsvParser(string filePath, string delimiter = ",")
+        public IEnumerable<T> Parse<T>(string filePath, CsvParserOptions options = default)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
@@ -19,14 +17,12 @@ namespace NinjaCsv
             if (!File.Exists(filePath))
                 throw new ArgumentException($"The file path {filePath} does not exist");
 
-            if(delimiter == null)
-                throw new ArgumentNullException(nameof(delimiter));
+            if (options == null)
+            {
+                options = new CsvParserOptions();
+            }
 
-            if(delimiter == string.Empty)
-                throw new ArgumentException($"{nameof(delimiter)} cannot be empty");
-
-            _filePath = filePath;
-            _delimiter = delimiter;
+            return null;
         }
     }
 }
