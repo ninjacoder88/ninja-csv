@@ -35,6 +35,8 @@ namespace NinjaCsv
 
             foreach (var propertyInfo in properties)
             {
+                //TODO: make sure its simple value type not reference types or structs, https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/types#simple-types
+
                 var attributes = propertyInfo.GetCustomAttributes(false);
                 var attribute = attributes.FirstOrDefault();
                 if (attribute == null)
@@ -43,7 +45,7 @@ namespace NinjaCsv
                 }
 
                 var column = attribute as Column;
-                //check for null?
+                //TODO: check for null?
                 nameForPosition.Add(column.Position, propertyInfo.Name);
             }
 
@@ -75,7 +77,7 @@ namespace NinjaCsv
                     var declaringType = instancePropertyInfo.PropertyType;
                     object finalValue;
                     
-                    //this can be improved, no but really
+                    //TODO: this can be improved, no but really
                     if (declaringType == typeof(int))
                     {
                         if (int.TryParse(c, out int intValue))
@@ -109,6 +111,9 @@ namespace NinjaCsv
                             throw new Exception();
                         }
                     }
+                    //TODO: bool
+                    //TODO: long
+                    //TODO: see https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-types
                     else
                     {
                         finalValue = c;
