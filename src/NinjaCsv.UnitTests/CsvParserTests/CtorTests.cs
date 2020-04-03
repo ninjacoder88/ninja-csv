@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoFixture;
+using NinjaCsv.UnitTests.Utility;
 using NUnit.Framework;
 
 namespace NinjaCsv.UnitTests.CsvParserTests
@@ -53,10 +54,37 @@ namespace NinjaCsv.UnitTests.CsvParserTests
         }
 
         [Test]
+        public void DelimiterIsNull_ThrowsArgumentNullException()
+        {
+            //SETUP
+            string filePath = UnitTestFilePath.Empty;
+
+            //TEST
+            void TestDelegate() => new CsvParser(filePath, null);
+
+            //VALIDATE
+            Assert.Throws<ArgumentNullException>(TestDelegate);
+        }
+
+        [Test]
+        public void DelimiterIsEmpty_ThrowsArgumentException()
+        {
+            //SETUP
+            string filePath = UnitTestFilePath.Empty;
+
+            //TEST
+            void TestDelegate() => new CsvParser(filePath, "");
+
+            //VALIDATE
+            var ex = Assert.Throws<ArgumentException>(TestDelegate);
+            Assert.That(ex.Message, Is.EqualTo("delimiter cannot be empty"));
+        }
+
+        [Test]
         public void FileExistAsPath_InstanceCreated()
         {
             //SETUP
-            string filePath = "TestCsvFiles/empty.csv";
+            string filePath = UnitTestFilePath.Empty;
 
             //TEST
             var SUT = new CsvParser(filePath);
