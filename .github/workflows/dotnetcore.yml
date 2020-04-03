@@ -20,6 +20,6 @@ jobs:
     - name: Install dependencies
       run: dotnet restore src/NinjaCsv/NinjaCsv.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore --source src/NinjaCsv/NinjaCsv.csproj
+      run: dotnet build src/NinjaCsv/NinjaCsv.csproj --configuration Release --no-restore 
     - name: Test
       run: dotnet test src/NinjaCsv.UnitTests/NinjaCsv.UnitTests.csproj --no-restore --verbosity normal 
