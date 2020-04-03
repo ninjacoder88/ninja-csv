@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace NinjaCsv
 {
@@ -22,7 +24,103 @@ namespace NinjaCsv
                 options = new CsvParserOptions();
             }
 
-            return null;
+            var fileLines = File.ReadAllLines(filePath).ToList();
+
+            if (options.ContainsHeaderRow)
+                fileLines = fileLines.Skip(1).ToList();
+
+            var nameForPosition = new Dictionary<int, string>();
+
+            var properties = typeof(T).GetProperties();
+
+            foreach (var propertyInfo in properties)
+            {
+                var attributes = propertyInfo.GetCustomAttributes(false);
+                var attribute = attributes.FirstOrDefault();
+                if (attribute == null)
+                {
+                    continue;
+                }
+
+                var column = attribute as Column;
+                //check for null?
+                nameForPosition.Add(column.Position, propertyInfo.Name);
+            }
+
+            var items = new List<T>();
+            for (var l = 0; l < fileLines.Count; l++)
+            {
+                var fileLine = fileLines[l];
+                var splitFileLine = fileLine.Split(new[] {options.Delimiter}, StringSplitOptions.None);
+
+                var instance = Activator.CreateInstance(typeof(T));
+                var instanceType = instance.GetType();
+
+                for (var i = 0; i < splitFileLine.Length; i++)
+                {
+                    var c = splitFileLine[i];
+
+                    if (!nameForPosition.ContainsKey(i))
+                    {
+                        continue;
+                    }
+
+                    var value = nameForPosition[i];
+                    var instancePropertyInfo = instanceType.GetProperty(value, BindingFlags.Public | BindingFlags.Instance);
+                    if (instancePropertyInfo == null)
+                    {
+                        continue;
+                    }
+
+                    var declaringType = instancePropertyInfo.PropertyType;
+                    object finalValue;
+                    
+                    //this can be improved, no but really
+                    if (declaringType == typeof(int))
+                    {
+                        if (int.TryParse(c, out int intValue))
+                        {
+                            finalValue = intValue;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    else if (declaringType == typeof(double))
+                    {
+                        if (double.TryParse(c, out double doubleValue))
+                        {
+                            finalValue = doubleValue;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    else if (declaringType == typeof(decimal))
+                    {
+                        if (decimal.TryParse(c, out decimal decimalValue))
+                        {
+                            finalValue = decimalValue;
+                        }
+                        else
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    else
+                    {
+                        finalValue = c;
+                    }
+
+                    instancePropertyInfo.SetValue(instance, finalValue);
+                }
+
+                items.Add((T)instance);
+            }
+
+            return items;
         }
     }
 }
