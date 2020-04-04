@@ -1,13 +1,15 @@
-﻿using System;
-using AutoFixture;
-using NinjaCsv.UnitTests.Utility;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace NinjaCsv.UnitTests.CsvParserTests
 {
     [TestFixture]
     public class CtorTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+        }
+
         [Test]
         public void ReturnsInstance()
         {
