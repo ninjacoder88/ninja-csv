@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NinjaCsv", "NinjaCsv\NinjaC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NinjaCsv.UnitTests", "NinjaCsv.UnitTests\NinjaCsv.UnitTests.csproj", "{314C4C9E-A6A8-4AD5-8C9D-37E38AA539A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinjaCsv.IntegrationTests", "NinjaCsv.IntegrationTests\NinjaCsv.IntegrationTests.csproj", "{F5F6481B-96E9-457F-A9ED-2EBC0E0BFDBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NinjaCsv.IntegrationTests", "NinjaCsv.IntegrationTests\NinjaCsv.IntegrationTests.csproj", "{F5F6481B-96E9-457F-A9ED-2EBC0E0BFDBB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{49C6C7A4-2317-4842-A2CF-20E9E34174C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{314C4C9E-A6A8-4AD5-8C9D-37E38AA539A2} = {49C6C7A4-2317-4842-A2CF-20E9E34174C9}
+		{F5F6481B-96E9-457F-A9ED-2EBC0E0BFDBB} = {49C6C7A4-2317-4842-A2CF-20E9E34174C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9FC3A209-309C-4AA0-9B4C-34966F14B74C}
