@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace NinjaCsv.Internal.Interfaces
 {
-    internal interface INameToCsvMapper
+    internal interface IPropertyNameToColumnMapper
     {
         IEnumerable<KeyValuePair<int, string>> Map(PropertyInfo[] properties);
     }

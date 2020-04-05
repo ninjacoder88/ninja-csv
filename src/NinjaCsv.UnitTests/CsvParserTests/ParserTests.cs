@@ -20,8 +20,8 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             _fixture = new Fixture();
             _systemFile = Substitute.For<ISystemFile>();
             _fileLineProcessor = Substitute.For<IFileLineProcessor>();
-            _nameToCsvMapper = Substitute.For<INameToCsvMapper>();
-            _sut = new CsvParser {SystemFile = _systemFile, FileLineProcessor = _fileLineProcessor, NameToCsvMapper = _nameToCsvMapper};
+            _propertyNameToColumnMapper = Substitute.For<IPropertyNameToColumnMapper>();
+            _sut = new CsvParser {SystemFile = _systemFile, FileLineProcessor = _fileLineProcessor, PropertyNameToColumnMapper = _propertyNameToColumnMapper};
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
             _systemFile.ReadAllLines(filePath).Returns(new[] { headerFileLine, firstFileLine });
-            _nameToCsvMapper.Map(Arg.Any<PropertyInfo[]>()).ReturnsNullForAnyArgs();
+            _propertyNameToColumnMapper.Map(Arg.Any<PropertyInfo[]>()).ReturnsNullForAnyArgs();
 
             //TEST
             void TestDelegate() => _sut.Parse<UnitTestItem>(filePath);
@@ -127,7 +127,7 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
             _systemFile.ReadAllLines(filePath).Returns(new []{headerFileLine, firstFileLine});
-            _nameToCsvMapper.Map(Arg.Any<PropertyInfo[]>()).Returns(dictionary);
+            _propertyNameToColumnMapper.Map(Arg.Any<PropertyInfo[]>()).Returns(dictionary);
             _fileLineProcessor.Process<UnitTestItem>(firstFileLine, ",", Arg.Any<Dictionary<int, string>>()).Returns(item);
 
             //TEST
@@ -142,7 +142,7 @@ namespace NinjaCsv.UnitTests.CsvParserTests
         private Fixture _fixture;
         private CsvParser _sut;
         private ISystemFile _systemFile;
-        private INameToCsvMapper _nameToCsvMapper;
+        private IPropertyNameToColumnMapper _propertyNameToColumnMapper;
         private IFileLineProcessor _fileLineProcessor;
     }
 }

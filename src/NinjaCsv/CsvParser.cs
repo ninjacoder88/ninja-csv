@@ -11,16 +11,22 @@ namespace NinjaCsv
         {
         }
 
+        internal ICellDataParser CellDataParser
+        {
+            get => _cellDataParser ?? (_cellDataParser = new CellDataParser());
+            set => _cellDataParser = value;
+        }
+
         internal IFileLineProcessor FileLineProcessor
         {
-            get => _fileLineProcessor ?? (_fileLineProcessor = new FileLineProcessor());
+            get => _fileLineProcessor ?? (_fileLineProcessor = new FileLineProcessor(CellDataParser));
             set => _fileLineProcessor = value;
         }
 
-        internal INameToCsvMapper NameToCsvMapper
+        internal IPropertyNameToColumnMapper PropertyNameToColumnMapper
         {
-            get => _nameToCsvMapper ?? (_nameToCsvMapper = new NameToCsvMapper());
-            set => _nameToCsvMapper = value;
+            get => _propertyNameToColumnMapper ?? (_propertyNameToColumnMapper = new PropertyNameToColumnMapper());
+            set => _propertyNameToColumnMapper = value;
         }
 
         internal ISystemFile SystemFile
@@ -63,19 +69,19 @@ namespace NinjaCsv
 
             var properties = typeof(T).GetProperties();
 
-            var nameForPosition = NameToCsvMapper.Map(properties);
+            var nameForPosition = PropertyNameToColumnMapper.Map(properties);
             if (nameForPosition == null)
             {
-                throw new InvalidOperationException("Failed to map");//TODO: better exception
+                throw new InvalidOperationException("Failed to map"); //TODO: better exception
             }
 
             var nameForPositionDictionary = nameForPosition.ToDictionary(k => k.Key, v => v.Value);
 
             if (!nameForPositionDictionary.Any())
             {
-                //exception?
+                throw new InvalidOperationException("No column attributes were present");
             }
-            
+
             var items = new List<T>();
             for (var l = 0; l < fileLineList.Count; l++)
             {
@@ -90,8 +96,9 @@ namespace NinjaCsv
             return items;
         }
 
+        private ICellDataParser _cellDataParser;
         private IFileLineProcessor _fileLineProcessor;
-        private INameToCsvMapper _nameToCsvMapper;
+        private IPropertyNameToColumnMapper _propertyNameToColumnMapper;
         private ISystemFile _systemFile;
     }
 }

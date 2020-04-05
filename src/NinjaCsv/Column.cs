@@ -6,6 +6,9 @@ namespace NinjaCsv
     {
 		public Column(int position)
         {
+            if(position < 0)
+                throw new ArgumentException($"{position} cannot be negative");
+
             Position = position;
         }
 
