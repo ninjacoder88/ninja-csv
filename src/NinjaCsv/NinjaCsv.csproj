@@ -2,6 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>false</SignAssembly>
+    <Company>Ninja Software Consulting</Company>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Description>Build and parse delimited files</Description>
+    <PackageReleaseNotes>Initial release contains the ability to parse files into custom objects.</PackageReleaseNotes>
+    <RepositoryUrl>https://github.com/ninjacoder88/ninja-csv.git</RepositoryUrl>
+    <PackageLicenseFile></PackageLicenseFile>
+    <Authors>Ninja Software Consulting</Authors>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageTags>csv tsv psv file-parser</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <PackageIcon>ninja.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\resources\ninja.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
