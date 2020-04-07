@@ -43,7 +43,7 @@ namespace NinjaCsv
             if (filePath == string.Empty)
                 throw new ArgumentException($"{nameof(filePath)} cannot be empty");
 
-            if (!_systemFile.Exists(filePath))
+            if (!SystemFile.Exists(filePath))
                 throw new ArgumentException($"The file path {filePath} does not exist");
 
             var fileLines = _systemFile.ReadAllLines(filePath);

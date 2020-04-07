@@ -57,8 +57,8 @@ namespace NinjaCsv
             var instancePropertyInfo = instanceType.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
             if (instancePropertyInfo == null)
             {
-                //TODO: consider an exception here
-                return;
+                //TODO: add unit test
+                throw new Exception($"Could not find a public property with name {propertyName}");
             }
 
             var instancePropertyType = instancePropertyInfo.PropertyType;
@@ -69,6 +69,13 @@ namespace NinjaCsv
             if (instancePropertyType.FullName != finalValueType)
             {
                 throw new InvalidOperationException($"The type of {propertyName} ({instancePropertyType.FullName}) does not match the parsed value of {finalValue} ({finalValueType})");
+            }
+
+            var setMethod = instancePropertyInfo.GetSetMethod(true);
+            if (setMethod == null)
+            {
+                //TODO: add unit test
+                throw new Exception($"Unable to find set method for property {propertyName}");
             }
 
             instancePropertyInfo.SetValue(instance, finalValue);
