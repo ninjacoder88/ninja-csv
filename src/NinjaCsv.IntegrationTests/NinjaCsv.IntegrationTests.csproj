@@ -7,12 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestCsvFiles\empty.csv" />
+    <None Remove="HeaderRowOnlyCsvFileTests\header-row-only.csv" />
+    <None Remove="SingleRowCsvFileTests\single-value-row.csv" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="TestCsvFiles\empty.csv">
+    <Content Include="EmptyCsvFileTests\empty.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HeaderRowOnlyCsvFileTests\header-row-only.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SingleRowCsvFileTests\single-value-row.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -20,6 +27,10 @@
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NinjaCsv\NinjaCsv.csproj" />
   </ItemGroup>
 
 </Project>
