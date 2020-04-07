@@ -14,5 +14,15 @@ namespace NinjaCsv
         {
             return File.ReadAllLines(filePath);
         }
+
+        public Stream OpenRead(string filePath)
+        {
+            return File.OpenRead(filePath);
+        }
+
+        public void CloseRead(Stream stream)
+        {
+            stream.Close();
+        }
     }
 }

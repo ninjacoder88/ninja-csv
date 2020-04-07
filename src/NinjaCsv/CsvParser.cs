@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NinjaCsv.Internal.Interfaces;
 
 namespace NinjaCsv
@@ -46,6 +47,8 @@ namespace NinjaCsv
             if (!SystemFile.Exists(filePath))
                 throw new ArgumentException($"The file path {filePath} does not exist");
 
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic);
+
             var fileLines = _systemFile.ReadAllLines(filePath);
             if (fileLines == null)
             {
@@ -67,7 +70,8 @@ namespace NinjaCsv
             if (options.ContainsHeaderRow)
                 fileLineList = fileLineList.Skip(1).ToList();
 
-            var properties = typeof(T).GetProperties();
+            
+            //TODO: check if properties is empty
 
             var nameForPosition = PropertyNameToColumnMapper.Map(properties);
             if (nameForPosition == null)
