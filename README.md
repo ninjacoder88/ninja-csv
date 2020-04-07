@@ -5,9 +5,11 @@ NinjaCsv is a library which allows parsing CSV (or a delimiter of your choice) f
 
 # How to Use
 1. Add a reference
+
 Add a reference to the nuget package NinjaCsv
 
 2. Setup DTO (data transfer object)
+
 - Create a class to server as the DTO
 - Add the `Column` attribute to the properties that you want read from the CSV file.
 - **Column construtor accepts an integer which represents the column in the CSV file. This value is ZERO based**.
@@ -28,6 +30,7 @@ public class Item
 ```
 
 3. Call the API
+
 Create an instance of `CsvParser`
 
 `var parser = new CsvParser();`
