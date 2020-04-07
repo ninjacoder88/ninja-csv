@@ -7,11 +7,12 @@ NinjaCsv is a library which allows parsing CSV (or a delimiter of your choice) f
 Add a reference to the nuget package
 
 
-Create a class to server as the DTO (data transfer object).
-Add the `Column` attribute to the properties that you want read from the CSV file.
-**Column construtor accepts an integer which represents the column in the CSV file. This value is ZERO based**.
-Properties to be mapped MUST have a setter, either public or private.
-At least one property MUST be mapped but not all properties have to be mapped.
+- Create a class to server as the DTO (data transfer object)
+- Add the `Column` attribute to the properties that you want read from the CSV file.
+- **Column construtor accepts an integer which represents the column in the CSV file. This value is ZERO based**.
+- Properties to be mapped MUST have a setter, either public or private.
+- At least one property MUST be mapped but not all properties have to be mapped.
+
 ```
 public class Item
 {
