@@ -72,9 +72,9 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             //SETUP
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
-            _systemFile.ReadAllLines(filePath).ReturnsNullForAnyArgs();
             _propertyInfoToColumnMapper.Map(Arg.Any<PropertyInfo[]>(), false).Returns(new List<KeyValuePair<int, PropertyInfoView>>());
             _streamReader.Peek().Returns(0);
+            _fileLineProcessor.Process<UnitTestItem>();
 
             //TEST
             void TestDelegate() => _sut.Parse<UnitTestItem>(filePath).ToList();
@@ -90,7 +90,6 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             //SETUP
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
-            _systemFile.ReadAllLines(filePath).Returns(new string[0]);
 
             //TEST
             var result = _sut.Parse<UnitTestItem>(filePath);
@@ -108,7 +107,6 @@ namespace NinjaCsv.UnitTests.CsvParserTests
 
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
-            _systemFile.ReadAllLines(filePath).Returns(new[] { headerFileLine, firstFileLine });
             _propertyInfoToColumnMapper.Map(Arg.Any<PropertyInfo[]>(), false).ReturnsNullForAnyArgs();
 
             //TEST
