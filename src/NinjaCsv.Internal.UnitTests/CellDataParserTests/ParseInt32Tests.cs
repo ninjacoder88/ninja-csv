@@ -2,7 +2,7 @@
 using AutoFixture;
 using NUnit.Framework;
 
-namespace NinjaCsv.UnitTests.CellDataParserTests
+namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
 {
     public class ParseInt32Tests
     {

@@ -2,10 +2,10 @@
 using AutoFixture;
 using NUnit.Framework;
 
-namespace NinjaCsv.UnitTests.CellDataParserTests
+namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
 {
     [TestFixture]
-    public class ParseBooleanTests
+    public class ParseDecimalTests
     {
         [SetUp]
         public void SetUp()
@@ -20,10 +20,10 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(bool), null);
+            var result = sut.Parse(typeof(decimal), null);
 
             //VALIDATE
-            Assert.That(result, Is.EqualTo(default(bool)));
+            Assert.That(result, Is.EqualTo(default(decimal)));
         }
 
         [Test]
@@ -33,22 +33,22 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(bool), string.Empty);
+            var result = sut.Parse(typeof(decimal), string.Empty);
 
             //VALIDATE
-            Assert.That(result, Is.EqualTo(default(bool)));
+            Assert.That(result, Is.EqualTo(default(decimal)));
         }
 
         [Test]
         public void CellHasValidData_ReturnsValueAsInt()
         {
             //SETUP
-            var cellValue = _fixture.Create<bool>();
+            var cellValue = _fixture.Create<decimal>();
             var cellValueAsString = cellValue.ToString();
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(bool), cellValueAsString);
+            var result = sut.Parse(typeof(decimal), cellValueAsString);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(cellValue));
@@ -62,11 +62,11 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            void TestDelegate() => sut.Parse(typeof(bool), cellValueAsString);
+            void TestDelegate() => sut.Parse(typeof(decimal), cellValueAsString);
 
             //VALIDATE
             var ex = Assert.Throws<InvalidOperationException>(TestDelegate);
-            Assert.That(ex.Message, Is.EqualTo($"Could not parse {cellValueAsString} to {typeof(bool).Name}"));
+            Assert.That(ex.Message, Is.EqualTo($"Could not parse {cellValueAsString} to {typeof(decimal).Name}"));
         }
 
         private Fixture _fixture;

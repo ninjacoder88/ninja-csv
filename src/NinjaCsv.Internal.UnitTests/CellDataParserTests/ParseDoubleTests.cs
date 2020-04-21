@@ -2,10 +2,10 @@
 using AutoFixture;
 using NUnit.Framework;
 
-namespace NinjaCsv.UnitTests.CellDataParserTests
+namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
 {
     [TestFixture]
-    public class ParseDecimalTests
+    public class ParseDoubleTests
     {
         [SetUp]
         public void SetUp()
@@ -20,10 +20,10 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(decimal), null);
+            var result = sut.Parse(typeof(double), null);
 
             //VALIDATE
-            Assert.That(result, Is.EqualTo(default(decimal)));
+            Assert.That(result, Is.EqualTo(default(double)));
         }
 
         [Test]
@@ -33,22 +33,22 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(decimal), string.Empty);
+            var result = sut.Parse(typeof(double), string.Empty);
 
             //VALIDATE
-            Assert.That(result, Is.EqualTo(default(decimal)));
+            Assert.That(result, Is.EqualTo(default(double)));
         }
 
         [Test]
         public void CellHasValidData_ReturnsValueAsInt()
         {
             //SETUP
-            var cellValue = _fixture.Create<decimal>();
+            var cellValue = _fixture.Create<double>();
             var cellValueAsString = cellValue.ToString();
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(decimal), cellValueAsString);
+            var result = sut.Parse(typeof(double), cellValueAsString);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(cellValue));
@@ -62,11 +62,11 @@ namespace NinjaCsv.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            void TestDelegate() => sut.Parse(typeof(decimal), cellValueAsString);
+            void TestDelegate() => sut.Parse(typeof(double), cellValueAsString);
 
             //VALIDATE
             var ex = Assert.Throws<InvalidOperationException>(TestDelegate);
-            Assert.That(ex.Message, Is.EqualTo($"Could not parse {cellValueAsString} to {typeof(decimal).Name}"));
+            Assert.That(ex.Message, Is.EqualTo($"Could not parse {cellValueAsString} to {typeof(double).Name}"));
         }
 
         private Fixture _fixture;

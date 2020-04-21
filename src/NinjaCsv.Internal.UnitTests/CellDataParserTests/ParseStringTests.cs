@@ -1,8 +1,7 @@
-﻿using System;
-using AutoFixture;
+﻿using AutoFixture;
 using NUnit.Framework;
 
-namespace NinjaCsv.UnitTests.CellDataParserTests
+namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
 {
     [TestFixture]
     public class ParseStringTests
