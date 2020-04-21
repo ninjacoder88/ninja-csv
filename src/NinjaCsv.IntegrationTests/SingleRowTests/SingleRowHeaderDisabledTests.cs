@@ -3,12 +3,12 @@ using System.Linq;
 using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests
+namespace NinjaCsv.IntegrationTests.SingleRowTests
 {
     public class SingleRowHeaderDisabledTests
     {
         [Test]
-        public void HeaderOnlyCsvFile()
+        public void Test()
         {
             //SETUP
             var csvParser = new CsvParser();

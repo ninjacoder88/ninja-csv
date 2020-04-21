@@ -9,7 +9,6 @@
   <ItemGroup>
     <None Remove="CsvFiles\missing-columns.csv" />
     <None Remove="CsvFiles\multiple-value-rows.csv" />
-    <None Remove="NoColumnsMappedCsvTests\single-value-row.csv" />
   </ItemGroup>
 
   <ItemGroup>

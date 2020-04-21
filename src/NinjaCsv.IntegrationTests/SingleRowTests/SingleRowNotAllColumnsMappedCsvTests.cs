@@ -2,13 +2,13 @@
 using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
+namespace NinjaCsv.IntegrationTests.SingleRowTests
 {
     [TestFixture]
-    public class SingleRowAllColumnsMappedCsvTests
+    public class SingleRowNotAllColumnsMappedCsvTests
     {
         [Test]
-        public void TestName()
+        public void Test()
         {
             //SETUP
             var csvParser = new CsvParser();
@@ -21,7 +21,7 @@ namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
             var firstRow = list[0];
             Assert.That(firstRow.Id, Is.EqualTo(1));
             Assert.That(firstRow.Name, Is.EqualTo("jon"));
-            Assert.That(firstRow.Salary, Is.EqualTo(55000));
+            Assert.That(firstRow.Salary, Is.EqualTo(0));
             Assert.That(firstRow.Position, Is.EqualTo("junior developer"));
         }
 
@@ -33,7 +33,6 @@ namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
             [Column(1)]
             public string Name { get; set; }
 
-            [Column(2)]
             public int Salary { get; set; }
 
             [Column(3)]

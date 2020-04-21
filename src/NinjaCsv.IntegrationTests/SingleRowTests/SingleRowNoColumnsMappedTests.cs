@@ -1,11 +1,10 @@
 ﻿using System.Linq;
-using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
+namespace NinjaCsv.IntegrationTests.SingleRowTests
 {
     [TestFixture]
-    public class SingleRowNotAllColumnsMappedCsvTests
+    public class SingleRowNoColumnsMappedTests
     {
         [Test]
         public void TestName()
@@ -19,23 +18,20 @@ namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
             //VALIDATE
             Assert.That(list.Count, Is.EqualTo(1));
             var firstRow = list[0];
-            Assert.That(firstRow.Id, Is.EqualTo(1));
-            Assert.That(firstRow.Name, Is.EqualTo("jon"));
+            Assert.That(firstRow.Id, Is.EqualTo(0));
+            Assert.That(firstRow.Name, Is.EqualTo(null));
             Assert.That(firstRow.Salary, Is.EqualTo(0));
-            Assert.That(firstRow.Position, Is.EqualTo("junior developer"));
+            Assert.That(firstRow.Position, Is.EqualTo(null));
         }
 
         private class UnitTestItem
         {
-            [Column(0)]
             public int Id { get; set; }
 
-            [Column(1)]
             public string Name { get; set; }
 
             public int Salary { get; set; }
 
-            [Column(3)]
             public string Position { get; set; }
         }
     }

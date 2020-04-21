@@ -1,13 +1,13 @@
 ﻿using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests
+namespace NinjaCsv.IntegrationTests.EmptyFileTests
 {
     [TestFixture]
     public class EmptyCsvTests
     {
         [Test]
-        public void EmptyCsvFile()
+        public void Test()
         {
             //SETUP
             var csvParser = new CsvParser();
