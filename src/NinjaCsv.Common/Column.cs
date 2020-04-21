@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NinjaCsv
+namespace NinjaCsv.Common
 {
     public class Column : Attribute
     {
