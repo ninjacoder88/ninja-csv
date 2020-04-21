@@ -17,6 +17,7 @@ namespace NinjaCsv.UnitTests.CsvParserOptionsTests
             Assert.That(sut, Is.Not.Null);
             Assert.That(sut.Delimiter, Is.EqualTo(","));
             Assert.That(sut.ContainsHeaderRow, Is.EqualTo(true));
+            Assert.That(sut.ConsiderNonPublic, Is.False);
         }
     }
 }
