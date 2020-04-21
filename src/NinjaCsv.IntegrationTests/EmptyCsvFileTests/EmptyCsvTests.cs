@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NinjaCsv.Common;
+using NUnit.Framework;
 
 namespace NinjaCsv.IntegrationTests.Tests
 {

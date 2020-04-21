@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using NinjaCsv.Common;
 using NUnit.Framework;
 
 namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests

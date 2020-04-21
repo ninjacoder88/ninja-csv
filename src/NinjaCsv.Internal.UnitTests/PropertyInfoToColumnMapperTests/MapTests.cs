@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AutoFixture;
 using AutoFixture.Kernel;
-using NinjaCsv.UnitTests.Utility;
-using NSubstitute;
+using NinjaCsv.Common;
+using NinjaCsv.Internal.UnitTests.Stubs;
 using NUnit.Framework;
 
-namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
+namespace NinjaCsv.Internal.UnitTests.PropertyInfoToColumnMapperTests
 {
     [TestFixture]
     public class MapTests
@@ -24,7 +23,7 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
         public void PropertiesIsNull_ThrowsArgumentNullException()
         {
             //SETUP
-            var sut = new PropertyNameToColumnMapper();
+            var sut = new PropertyInfoToColumnMapper();
 
             //TEST
             void TestDelegate() => sut.Map(null).ToList();
@@ -38,7 +37,7 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
         {
             //SETUP
             var propertyInfo = _fixture.Create<PropertyInfo>();
-            var sut = new PropertyNameToColumnMapper();
+            var sut = new PropertyInfoToColumnMapper();
 
             //TEST
             var result = sut.Map(new[]{propertyInfo}).ToList();
@@ -53,7 +52,7 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
             //SETUP
             var propertyInfo = _fixture.Create<UnitTestPropertyInfo>();
             propertyInfo.AddCustomAttribute(new UnitTestAttribute());
-            var sut = new PropertyNameToColumnMapper();
+            var sut = new PropertyInfoToColumnMapper();
 
             //TEST
             var result = sut.Map(new PropertyInfo[] { propertyInfo }).ToList();
@@ -69,8 +68,8 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
             var propertyInfo = _fixture.Create<UnitTestPropertyInfo>();
             propertyInfo.AddCustomAttribute(new Column(1));
             var propertyName = _fixture.Create<string>();
-            propertyInfo.SetName(propertyName);
-            var sut = new PropertyNameToColumnMapper();
+            propertyInfo.CustomizeName(propertyName);
+            var sut = new PropertyInfoToColumnMapper();
 
             //TEST
             var result = sut.Map(new PropertyInfo[] { propertyInfo }).ToList();
@@ -79,7 +78,8 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
             Assert.That(result, Is.Not.Empty);
             Assert.That(result.Count, Is.EqualTo(1));
             Assert.That(result[0].Key, Is.EqualTo(1));
-            Assert.That(result[0].Value, Is.EqualTo(propertyName));
+            Assert.That(result[0].Value.PropertyName, Is.EqualTo(propertyName));
+            //TODO: add additional assertions for Value
         }
 
         [Test]
@@ -90,14 +90,10 @@ namespace NinjaCsv.UnitTests.PropertyNameToColumnMapperTests
             propertyInfo.AddCustomAttribute(new Column(1));
             propertyInfo.AddCustomAttribute(new Column(2));
             var propertyName = _fixture.Create<string>();
-            propertyInfo.SetName(propertyName);
-            var sut = new PropertyNameToColumnMapper();
+            propertyInfo.CustomizeName(propertyName);
+            var sut = new PropertyInfoToColumnMapper();
 
             //TEST
-            //var result = sut.Map(new PropertyInfo[] {propertyInfo}).ToList();
-
-            //Assert.That(result, Is.Null);
-
             void TestDelegate() => sut.Map(new PropertyInfo[] { propertyInfo }).ToList();
 
             //VALIDATE

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="HeaderRowOnlyCsvFileTests\header-row-only.csv" />
+    <None Remove="NoColumnsMappedCsvTests\single-value-row.csv" />
     <None Remove="SingleRowCsvFileTests\single-value-row.csv" />
   </ItemGroup>
 
@@ -17,6 +18,9 @@
     </Content>
     <Content Include="HeaderRowOnlyCsvFileTests\header-row-only.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="NoColumnsMappedCsvTests\single-value-row.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SingleRowCsvFileTests\single-value-row.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

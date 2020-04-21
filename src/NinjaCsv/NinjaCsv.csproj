@@ -25,4 +25,9 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\NinjaCsv.Common\NinjaCsv.Common.csproj" />
+    <ProjectReference Include="..\NinjaCsv.Internal\NinjaCsv.Internal.csproj" />
+  </ItemGroup>
+
 </Project>
