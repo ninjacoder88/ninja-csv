@@ -14,7 +14,7 @@ namespace NinjaCsv.IntegrationTests.SingleRowCsvFileTests
             var csvParser = new CsvParser();
 
             //TEST
-            var list = csvParser.Parse<UnitTestItem>("SingleRowCsvFileTests/single-value-row.csv").ToList();
+            var list = csvParser.Parse<UnitTestItem>("CsvFiles/single-value-row.csv").ToList();
 
             //VALIDATE
             Assert.That(list.Count, Is.EqualTo(1));

@@ -31,7 +31,7 @@ namespace NinjaCsv.Internal
             if (rowLength < keyValuePair.Key)
                 return;
 
-            var cell = splitFileLine[keyValuePair.Key]; //this can throw an exception
+            var cell = splitFileLine[keyValuePair.Key];
 
             var parsedCellValue = _cellDataParser.Parse(keyValuePair.Value.PropertyType, cell);
 

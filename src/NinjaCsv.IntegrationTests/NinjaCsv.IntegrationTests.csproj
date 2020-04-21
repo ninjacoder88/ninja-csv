@@ -7,22 +7,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="HeaderRowOnlyCsvFileTests\header-row-only.csv" />
+    <None Remove="CsvFiles\missing-columns.csv" />
+    <None Remove="CsvFiles\multiple-value-rows.csv" />
     <None Remove="NoColumnsMappedCsvTests\single-value-row.csv" />
-    <None Remove="SingleRowCsvFileTests\single-value-row.csv" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="EmptyCsvFileTests\empty.csv">
+    <Content Include="CsvFiles\empty.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="HeaderRowOnlyCsvFileTests\header-row-only.csv">
+    <Content Include="CsvFiles\header-row-only.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="NoColumnsMappedCsvTests\single-value-row.csv">
+    <Content Include="CsvFiles\missing-columns.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="SingleRowCsvFileTests\single-value-row.csv">
+    <Content Include="CsvFiles\multiple-value-rows.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CsvFiles\single-value-row.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

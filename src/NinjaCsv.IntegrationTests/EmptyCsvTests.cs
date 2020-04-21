@@ -1,7 +1,7 @@
 ﻿using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests.Tests
+namespace NinjaCsv.IntegrationTests
 {
     [TestFixture]
     public class EmptyCsvTests
@@ -13,7 +13,7 @@ namespace NinjaCsv.IntegrationTests.Tests
             var csvParser = new CsvParser();
 
             //TEST
-            var list = csvParser.Parse<UnitTestItem>("EmptyCsvFileTests/empty.csv");
+            var list = csvParser.Parse<UnitTestItem>("CsvFiles/empty.csv");
 
             //VALIDATE
             Assert.That(list, Is.Empty);
@@ -21,11 +21,13 @@ namespace NinjaCsv.IntegrationTests.Tests
 
         private class UnitTestItem
         {
-            [Column(1)]
+            [Column(0)]
             public int Id { get; set; }
 
+            [Column(1)]
             public string Name { get; set; }
 
+            [Column(2)]
             public double Value { get; set; }
         }
     }

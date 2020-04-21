@@ -1,10 +1,12 @@
-﻿using NinjaCsv.Common;
+﻿using System;
+using System.Linq;
+using NinjaCsv.Common;
 using NUnit.Framework;
 
-namespace NinjaCsv.IntegrationTests.HeaderRowOnlyCsvFileTests
+namespace NinjaCsv.IntegrationTests
 {
     [TestFixture]
-    public class HeaderRowOnlyTests
+    public class SingleRowHeaderEnabledTests
     {
         [Test]
         public void HeaderOnlyCsvFile()
@@ -13,7 +15,7 @@ namespace NinjaCsv.IntegrationTests.HeaderRowOnlyCsvFileTests
             var csvParser = new CsvParser();
 
             //TEST
-            var list = csvParser.Parse<UnitTestItem>("HeaderRowOnlyCsvFileTests/header-row-only.csv");
+            var list = csvParser.Parse<UnitTestItem>("CsvFiles/header-row-only.csv").ToList();
 
             //VALIDATE
             Assert.That(list, Is.Empty);
@@ -21,13 +23,13 @@ namespace NinjaCsv.IntegrationTests.HeaderRowOnlyCsvFileTests
 
         private class UnitTestItem
         {
-            [Column(1)]
+            [Column(0)]
             public int Id { get; set; }
 
-            [Column(2)]
+            [Column(1)]
             public string Name { get; set; }
 
-            [Column(3)]
+            [Column(2)]
             public double Value { get; set; }
         }
     }

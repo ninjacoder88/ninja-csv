@@ -38,7 +38,7 @@ namespace NinjaCsv.Internal
                     if (tryParseMethod.InvokeTryParseMethod(cell, out finalValue))
                         return finalValue;
                     else
-                        throw new InvalidOperationException($"Could not parse {cell} to {instancePropertyType.Name}");
+                        throw new InvalidOperationException($"Could not parse value '{cell}' to {instancePropertyType.Name}");
                 case TypeFullName.String:
                     finalValue = cell;
                     break;

@@ -13,7 +13,7 @@ namespace NinjaCsv.IntegrationTests.NoColumnsMappedCsvTests
             var csvParser = new CsvParser();
 
             //TEST
-            var list = csvParser.Parse<UnitTestItem>("NoColumnsMappedCsvTests/single-value-row.csv").ToList();
+            var list = csvParser.Parse<UnitTestItem>("CsvFiles/single-value-row.csv").ToList();
 
             //VALIDATE
             Assert.That(list.Count, Is.EqualTo(1));
