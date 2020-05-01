@@ -13,6 +13,9 @@ namespace NinjaCsv.Internal
 
         public T Process<T>(string fileLine, string delimiter, Type targetType, IEnumerable<KeyValuePair<int, PropertyInfoView>> propertyMap)
         {
+            if(fileLine == null)
+                throw new ArgumentNullException(nameof(fileLine));
+
             var splitFileLine = fileLine.Split(new[] { delimiter }, StringSplitOptions.None);
             var rowLength = splitFileLine.Length;
 
@@ -28,7 +31,7 @@ namespace NinjaCsv.Internal
 
         private void SideEffect(KeyValuePair<int, PropertyInfoView> keyValuePair, int rowLength, string[] splitFileLine, object instance)
         {
-            if (rowLength < keyValuePair.Key)
+            if (rowLength - 1 < keyValuePair.Key)
                 return;
 
             var cell = splitFileLine[keyValuePair.Key];

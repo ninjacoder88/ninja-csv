@@ -64,9 +64,7 @@ namespace NinjaCsv
 
                     lineNumber++;
 
-                    var instance = _fileLineProcessor.Process<T>(str, options.Delimiter, targetType, propertyMap);
-
-                    yield return instance;
+                    yield return _fileLineProcessor.Process<T>(str, options.Delimiter, targetType, propertyMap);
                 }
             }
         }

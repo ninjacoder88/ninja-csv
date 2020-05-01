@@ -67,6 +67,23 @@ namespace NinjaCsv.UnitTests.CsvParserTests
         }
 
         [Test]
+        public void TestName()
+        {
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        [Test]
         public void FileLinesIsNull_ThrowsInvalidOperationException()
         {
             //SETUP
@@ -74,7 +91,7 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             _systemFile.Exists(filePath).Returns(true);
             _propertyInfoToColumnMapper.Map(Arg.Any<PropertyInfo[]>(), false).Returns(new List<KeyValuePair<int, PropertyInfoView>>());
             _streamReader.Peek().Returns(0);
-            _fileLineProcessor.Process<UnitTestItem>();
+            _fileLineProcessor.Process<UnitTestItem>(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<Type>(), Arg.Any<IEnumerable<KeyValuePair<int, PropertyInfoView>>>()).Returns(new UnitTestItem());
 
             //TEST
             void TestDelegate() => _sut.Parse<UnitTestItem>(filePath).ToList();
