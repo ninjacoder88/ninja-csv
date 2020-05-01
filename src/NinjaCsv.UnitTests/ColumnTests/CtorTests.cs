@@ -1,7 +1,7 @@
 ﻿using System;
 using AutoFixture;
+using NinjaCsv.Common;
 using NUnit.Framework;
-using NUnit.Framework.Internal;
 
 namespace NinjaCsv.UnitTests.ColumnTests
 {

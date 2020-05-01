@@ -10,6 +10,8 @@
             ContainsHeaderRow = true;
         }
 
+        public bool ConsiderNonPublic { get; set; }
+
         public bool ContainsHeaderRow { get; set; }
 
         public string Delimiter
