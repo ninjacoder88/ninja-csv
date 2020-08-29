@@ -6,7 +6,7 @@
     <Company>Ninja Software Consulting</Company>
     <PackageProjectUrl></PackageProjectUrl>
     <Description>Build and parse delimited files</Description>
-    <PackageReleaseNotes>Initial release contains the ability to parse files into custom objects.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for DateTime</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/ninjacoder88/ninja-csv.git</RepositoryUrl>
     <PackageLicenseFile></PackageLicenseFile>
     <Authors>Ninja Software Consulting</Authors>
@@ -16,6 +16,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageIcon>ninja.png</PackageIcon>
     <PackageIconUrl />
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -12,6 +12,7 @@ namespace NinjaCsv.Internal
         public const string Int64 = "System.Int64";
         public const string Boolean = "System.Boolean";
         public const string String = "System.String";
+        public const string DateTime = "System.DateTime";
     }
 
     internal class CellDataParser : ICellDataParser
@@ -34,6 +35,7 @@ namespace NinjaCsv.Internal
                 case TypeFullName.Decimal:
                 case TypeFullName.Double:
                 case TypeFullName.Int64:
+                case TypeFullName.DateTime:
                     var tryParseMethod = instancePropertyType.GetTryParseMethod();
                     if (tryParseMethod.InvokeTryParseMethod(cell, out finalValue))
                         return finalValue;

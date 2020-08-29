@@ -65,7 +65,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
 
             //VALIDATE
             var ex = Assert.Throws<InvalidOperationException>(TestDelegate);
-            Assert.That(ex.Message, Is.EqualTo($"Could not parse {cellValueAsString} to {typeof(int).Name}"));
+            Assert.That(ex.Message, Is.EqualTo($"Could not parse value '{cellValueAsString}' to {typeof(int).Name}"));
         }
 
         private Fixture _fixture;
