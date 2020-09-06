@@ -20,7 +20,7 @@ namespace NinjaCsv
             _systemFile = file;
         }
 
-        public void Write<T>(string filePath, IEnumerable<T> objects)
+        public void Write<T>(string filePath, IEnumerable<T> objects, Action<CsvWriterOptions> optionsConfig = null)
         {
             if (filePath == null)
                 throw new ArgumentNullException(nameof(filePath));
@@ -30,6 +30,10 @@ namespace NinjaCsv
 
             if (!_systemFile.Exists(filePath))
                 throw new ArgumentException($"The file path {filePath} does not exist");
+
+            var options = new CsvWriterOptions();
+
+            optionsConfig?.Invoke(options);
         }
 
         private Func<string, IStreamWriter> _streamWriterFactory;
