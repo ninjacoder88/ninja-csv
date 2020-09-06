@@ -16,6 +16,11 @@ namespace NinjaCsv.Internal.Proxy
             GC.SuppressFinalize(this);
         }
 
+        public void WriteLine(string value)
+        {
+            _streamWriter.WriteLine(value);
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
