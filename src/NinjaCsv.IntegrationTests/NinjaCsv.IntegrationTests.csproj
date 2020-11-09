@@ -10,6 +10,7 @@
     <None Remove="CsvFiles\missing-columns.csv" />
     <None Remove="CsvFiles\missing-values.csv" />
     <None Remove="CsvFiles\multiple-value-rows.csv" />
+    <None Remove="CsvFiles\single-value-row-with-null.csv" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CsvFiles\multiple-value-rows.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="CsvFiles\single-value-row-with-null.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CsvFiles\single-value-row.csv">
