@@ -13,6 +13,12 @@ namespace NinjaCsv.Internal
         public const string Boolean = "System.Boolean";
         public const string String = "System.String";
         public const string DateTime = "System.DateTime";
+        public const string NullableInt32 = "System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+        public const string NullableDouble = "System.Nullable`1[[System.Double, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+        public const string NullableDecimal = "System.Nullable`1[[System.Decimal, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+        public const string NullableInt64 = "System.Nullable`1[[System.Int64, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+        public const string NullableBoolean = "System.Nullable`1[[System.Boolean, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
+        public const string NullableDateTime = "System.Nullable`1[[System.DateTime, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]";
     }
 
     internal class CellDataParser : ICellDataParser
@@ -36,19 +42,34 @@ namespace NinjaCsv.Internal
                 case TypeFullName.Double:
                 case TypeFullName.Int64:
                 case TypeFullName.DateTime:
-                    var tryParseMethod = instancePropertyType.GetTryParseMethod();
-                    if (tryParseMethod.InvokeTryParseMethod(cell, out finalValue))
-                        return finalValue;
-                    else
-                        throw new InvalidOperationException($"Could not parse value '{cell}' to {instancePropertyType.Name}");
+                    return FindAndInvokeTryParse(instancePropertyType, cell);
                 case TypeFullName.String:
                     finalValue = cell;
+                    break;
+                case TypeFullName.NullableInt32:
+                case TypeFullName.NullableBoolean:
+                case TypeFullName.NullableDecimal:
+                case TypeFullName.NullableDouble:
+                case TypeFullName.NullableInt64:
+                case TypeFullName.NullableDateTime:
+                    if (cell.ToLower() == "null")
+                        finalValue = null;
+                    else
+                        return FindAndInvokeTryParse(instancePropertyType, cell);
                     break;
                 default:
                     throw new InvalidOperationException($"{instancePropertyType.Name} not supported at this time");
             }
 
             return finalValue;
+        }
+
+        private object FindAndInvokeTryParse(Type instancePropertyType, string cell)
+        {
+            var tryParseMethod = instancePropertyType.GetTryParseMethod();
+            if (tryParseMethod.InvokeTryParseMethod(cell, out var finalValue))
+                return finalValue;
+            throw new InvalidOperationException($"Could not parse value '{cell}' to {instancePropertyType.Name}");
         }
     }
 }
