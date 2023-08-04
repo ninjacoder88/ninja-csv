@@ -8,6 +8,11 @@ using NinjaCsv.Internal.Proxy;
 
 namespace NinjaCsv
 {
+    public interface ICsvParser
+    {
+        IEnumerable<T> Parse<T>(string filePath, Action<CsvParserOptions> optionsConfig = null);
+    }
+
     public class CsvParser
     {
         public CsvParser()
