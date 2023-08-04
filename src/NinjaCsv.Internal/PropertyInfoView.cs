@@ -11,6 +11,7 @@ namespace NinjaCsv.Internal
             propertyInfo = propertyInfo ?? throw new ArgumentNullException(nameof(propertyInfo));
             PropertyType = propertyInfo.PropertyType;
             SetMethod = propertyInfo.GetSetMethod(considerNonPublic);
+            GetMethod = propertyInfo.GetGetMethod(considerNonPublic);
         }
 
         public string PropertyName { get; }
@@ -18,5 +19,7 @@ namespace NinjaCsv.Internal
         public Type PropertyType { get; }
 
         public MethodInfo SetMethod { get; }
+
+        public MethodInfo GetMethod { get; }
     }
 }
