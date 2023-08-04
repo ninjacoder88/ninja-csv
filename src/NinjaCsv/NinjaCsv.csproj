@@ -6,7 +6,7 @@
     <Company>Ninja Software Consulting</Company>
     <PackageProjectUrl></PackageProjectUrl>
     <Description>Build and parse delimited files</Description>
-    <PackageReleaseNotes>Added creation functionality. Added interfaces to CsvCreator and CsvParser</PackageReleaseNotes>
+    <PackageReleaseNotes>Added ability to specify header row names</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/ninjacoder88/ninja-csv.git</RepositoryUrl>
     <PackageLicenseFile></PackageLicenseFile>
     <Authors>Ninja Software Consulting</Authors>
@@ -16,9 +16,9 @@
     <RepositoryType>git</RepositoryType>
     <PackageIcon>ninja.png</PackageIcon>
     <PackageIconUrl />
-    <AssemblyVersion>2.0.0.0</AssemblyVersion>
-    <FileVersion>2.0.0.0</FileVersion>
-    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <FileVersion>2.0.1.0</FileVersion>
+    <Version>2.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

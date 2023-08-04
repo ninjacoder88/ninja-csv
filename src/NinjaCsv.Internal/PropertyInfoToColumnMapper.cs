@@ -30,7 +30,7 @@ namespace NinjaCsv.Internal
                     counter++;
 
                     //consider checking if propertyInfo.Name is null
-                    var view = new PropertyInfoView(propertyInfo.Name, propertyInfo, considerNonPublic);
+                    var view = new PropertyInfoView(propertyInfo.Name, propertyInfo, considerNonPublic, column.HeaderName);
                     yield return new KeyValuePair<int, PropertyInfoView>(column.Position, view);
                 }
             }

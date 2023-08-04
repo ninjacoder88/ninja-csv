@@ -11,6 +11,8 @@
 
         public bool ConsiderNonPublic { get; set; }
 
+        public bool UseHeaderNames { get; set; }
+
         public string Delimiter
         {
             get => string.IsNullOrEmpty(_delimiter) ? _delimiter = DefaultDelimiter : _delimiter;
