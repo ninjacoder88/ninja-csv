@@ -42,10 +42,29 @@ namespace NinjaCsv
 
             using (var sw = _streamWriterFactory(filePath))
             {
-                if(!string.IsNullOrEmpty(headerRow))
+                if(options.UseHeaderNames)
                 {
-                    sw.Write(headerRow);
+                    for (int i = 0; i < propertyMap.Count; i++)
+                    {
+                        var property = propertyMap[i];
+                        var headerName = property.Value.HeaderName;
+
+                        if (string.IsNullOrEmpty(headerName))
+                            headerName = property.Value.PropertyName;
+
+                        sw.Write(headerName);
+                        if (i < propertyMap.Count - 1)
+                            sw.Write(options.Delimiter);  
+                    }
                     sw.WriteLine();
+                } 
+                else
+                {
+                    if (!string.IsNullOrEmpty(headerRow))
+                    {
+                        sw.Write(headerRow);
+                        sw.WriteLine();
+                    }
                 }
 
                 foreach (var item in items)
@@ -70,7 +89,7 @@ namespace NinjaCsv
 
         public void Create<T>(string filePath, IEnumerable<T> items, Action<CsvCreatorOptions> optionsConfig = null)
         {
-            Create(filePath, items, optionsConfig);
+            Create(filePath, null, items, optionsConfig);
         }
 
         private readonly IPropertyInfoToColumnMapper _propertyInfoToColumnMapper;
