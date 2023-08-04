@@ -36,7 +36,7 @@ namespace NinjaCsv
 
             var targetType = typeof(T);
 
-            var properties = targetType.GetPublicAndNonPublicInstanceProperties();
+            var properties = options.ConsiderNonPublic ? targetType.GetPublicAndNonPublicInstanceProperties() : targetType.GetPublicInstanceProperties();
 
             var propertyMap = _propertyInfoToColumnMapper.Map(properties, options.ConsiderNonPublic).OrderBy(x => x.Key).ToList();
 
@@ -63,7 +63,7 @@ namespace NinjaCsv
                         if (i < propertyMap.Count - 1)
                             sw.Write(options.Delimiter);
                     }
-                    sw.WriteLine();//dont write if end of list
+                    sw.WriteLine();//todo: dont write if end of list
                 }
             }
         }
