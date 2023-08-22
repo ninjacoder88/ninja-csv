@@ -13,7 +13,7 @@ namespace NinjaCsv
         IEnumerable<T> Parse<T>(string filePath, Action<CsvParserOptions> optionsConfig = null);
     }
 
-    public class CsvParser
+    public class CsvParser : ICsvParser
     {
         public CsvParser()
             : this(new PropertyInfoToColumnMapper(), s => new StreamReaderProxy(s), new FileProxy(),
