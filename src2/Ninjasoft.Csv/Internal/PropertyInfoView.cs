@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reflection;
 
-namespace NinjaCsv.Internal
+namespace Ninjasoft.Csv.Internal
 {
-    internal class PropertyInfoView
+    internal sealed class PropertyInfoView
     {
         public PropertyInfoView(string propertyName, PropertyInfo propertyInfo, bool considerNonPublic, int columnNumber, string headerName = null)
         {

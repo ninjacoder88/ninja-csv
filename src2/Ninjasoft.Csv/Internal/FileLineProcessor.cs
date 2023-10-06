@@ -1,19 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using NinjaCsv.Internal.Interfaces;
 
-namespace NinjaCsv.Internal
+namespace Ninjasoft.Csv.Internal
 {
-    internal class FileLineProcessor : IFileLineProcessor
+    internal interface IFileLineProcessor
+    {
+        T Process<T>(string fileLine, string delimiter, Type targetType, Dictionary<int, PropertyInfoView> propertyMap, int lineNumber);
+    }
+
+    internal sealed class FileLineProcessor : IFileLineProcessor
     {
         public FileLineProcessor(ICellDataParser cellDataParser)
         {
             _cellDataParser = cellDataParser ?? throw new ArgumentNullException(nameof(cellDataParser));
         }
 
-        public T Process<T>(string fileLine, string delimiter, Type targetType, IEnumerable<KeyValuePair<int, PropertyInfoView>> propertyMap, int lineNumber)
+        //public T Process<T>(string fileLine, string delimiter, Type targetType, IEnumerable<KeyValuePair<int, PropertyInfoView>> propertyMap, int lineNumber)
+        //{
+        //    if (fileLine == null)
+        //        throw new ArgumentNullException(nameof(fileLine));
+
+        //    var splitFileLine = fileLine.Split(new[] { delimiter }, StringSplitOptions.None);
+        //    var rowLength = splitFileLine.Length;
+
+        //    var instance = Activator.CreateInstance(targetType);
+
+        //    foreach (var keyValuePair in propertyMap)
+        //    {
+        //        SideEffect(keyValuePair, rowLength, splitFileLine, instance, lineNumber);
+        //    }
+
+        //    return (T)instance;
+        //}
+
+        public T Process<T>(string fileLine, string delimiter, Type targetType, Dictionary<int, PropertyInfoView> propertyMap, int lineNumber)
         {
-            if(fileLine == null)
+            if (fileLine == null)
                 throw new ArgumentNullException(nameof(fileLine));
 
             var splitFileLine = fileLine.Split(new[] { delimiter }, StringSplitOptions.None);

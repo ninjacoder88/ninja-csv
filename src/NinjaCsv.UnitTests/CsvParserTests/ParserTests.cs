@@ -78,9 +78,9 @@ namespace NinjaCsv.UnitTests.CsvParserTests
             //SETUP
             string filePath = _fixture.Create<string>();
             _systemFile.Exists(filePath).Returns(true);
-            _propertyInfoToColumnMapper.Map(Arg.Any<PropertyInfo[]>(), false).Returns(new List<KeyValuePair<int, PropertyInfoView>>());
+            //_propertyInfoToColumnMapper.Map(Arg.Any<PropertyInfo[]>(), false).Returns(new List<KeyValuePair<int, PropertyInfoView>>());
             _streamReader.Peek().Returns(0);
-            _fileLineProcessor.Process<UnitTestItem>(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<Type>(), Arg.Any<IEnumerable<KeyValuePair<int, PropertyInfoView>>>()).Returns(new UnitTestItem());
+            _fileLineProcessor.Process<UnitTestItem>(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<Type>(), Arg.Any<IEnumerable<KeyValuePair<int, PropertyInfoView>>>(), Arg.Any<int>()).Returns(new UnitTestItem());
 
             //TEST
             void TestDelegate() => _sut.Parse<UnitTestItem>(filePath).ToList();

@@ -21,7 +21,7 @@ namespace NinjaCsv.Internal.UnitTests.PropertyInfoViewTests
             var propertyInfoView = _fixture.Create<UnitTestPropertyInfo>();
 
             //TEST
-            TestDelegate testDelegate = () => new PropertyInfoView(null, propertyInfoView, false);
+            TestDelegate testDelegate = () => new PropertyInfoView(null, propertyInfoView, false, 1);
 
             //VALIDATE
             var ex = Assert.Throws<ArgumentNullException>(testDelegate);
@@ -35,7 +35,7 @@ namespace NinjaCsv.Internal.UnitTests.PropertyInfoViewTests
             var propertyInfoView = _fixture.Create<UnitTestPropertyInfo>();
 
             //TEST
-            TestDelegate testDelegate = () => new PropertyInfoView(string.Empty, propertyInfoView, false);
+            TestDelegate testDelegate = () => new PropertyInfoView(string.Empty, propertyInfoView, false, 1);
 
             //VALIDATE
             var ex = Assert.Throws<ArgumentNullException>(testDelegate);
@@ -49,7 +49,7 @@ namespace NinjaCsv.Internal.UnitTests.PropertyInfoViewTests
             var propertyName = _fixture.Create<string>();
 
             //TEST
-            TestDelegate testDelegate = () => new PropertyInfoView(propertyName, null, false);
+            TestDelegate testDelegate = () => new PropertyInfoView(propertyName, null, false, 1);
 
             //VALIDATE
             var ex = Assert.Throws<ArgumentNullException>(testDelegate);
@@ -68,7 +68,7 @@ namespace NinjaCsv.Internal.UnitTests.PropertyInfoViewTests
             propertyInfoView.CustomizePropertyType(propertyType);
 
             //TEST
-            var result = new PropertyInfoView(propertyName, propertyInfoView, false);
+            var result = new PropertyInfoView(propertyName, propertyInfoView, false, 1);
 
             //VALIDATE
             Assert.That(result.PropertyName, Is.EqualTo(propertyName));

@@ -18,7 +18,10 @@ namespace NinjaCsv.IntegrationTests.CsvCreatorTests
             };
 
             var creator = new CsvCreator();
-            creator.Create(@"c:\temp\result.csv", items);
+            creator.Create(@"c:\temp\result.csv", items, options =>
+            {
+                options.Delimiter = "|";
+            });
         }
 
         [Test]
@@ -32,7 +35,21 @@ namespace NinjaCsv.IntegrationTests.CsvCreatorTests
             };
 
             var creator = new CsvCreator();
-            creator.Create(@"c:\temp\result2.csv", items, options => options.UseHeaderNames = true);
+            creator.Create(@"c:\temp\result2.csv", items, options => options.CreateHeaderRow(hr => hr.UseHeaderNames = true));
+        }
+
+        [Test]
+        public void TestHeaders2()
+        {
+            var items = new List<Item>
+            {
+                new Item { Id = 1, Name = "A"},
+                new Item { Id = 2, Name = "B"},
+                new Item { Id = 3, Description = "C"},
+            };
+
+            var creator = new CsvCreator();
+            creator.Create(@"c:\temp\result3.csv", items, options => options.CreateHeaderRow(hr => hr.HeaderRowText = "Id,Name,Description"));
         }
     }
 

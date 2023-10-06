@@ -20,7 +20,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(long), null);
+            var result = sut.Parse(typeof(long), null, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(default(long)));
@@ -33,7 +33,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(long), string.Empty);
+            var result = sut.Parse(typeof(long), string.Empty, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(default(long)));
@@ -48,7 +48,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(long), cellValueAsString);
+            var result = sut.Parse(typeof(long), cellValueAsString, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(cellValue));
@@ -62,11 +62,11 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            void TestDelegate() => sut.Parse(typeof(long), cellValueAsString);
+            void TestDelegate() => sut.Parse(typeof(long), cellValueAsString, 1);
 
             //VALIDATE
             var ex = Assert.Throws<InvalidOperationException>(TestDelegate);
-            Assert.That(ex.Message, Is.EqualTo($"Could not parse value '{cellValueAsString}' to {typeof(long).Name}"));
+            Assert.That(ex.Message, Is.EqualTo($"Could not parse value '{cellValueAsString}' to {typeof(long).Name} on line 1"));
         }
 
         private Fixture _fixture;

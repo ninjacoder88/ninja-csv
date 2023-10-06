@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace NinjaCsv
+namespace Ninjasoft.Csv
 {
-    public class CsvCreatorOptions
+    public sealed class CsvWriterOptions
     {
         private const string DefaultDelimiter = ",";
 
-        public CsvCreatorOptions()
+        public CsvWriterOptions()
         {
             _delimiter = DefaultDelimiter;
         }
@@ -32,22 +32,12 @@ namespace NinjaCsv
         public void CreateHeaderRow(Action<HeaderRowOptions> optionsConfig = null)
         {
             var options = new HeaderRowOptions();
-
             optionsConfig?.Invoke(options);
-
+            options.UseHeaderNames = true;
             _headerRowOptions = options;
         }
 
         private string _delimiter;
         private HeaderRowOptions _headerRowOptions;
-    }
-
-    public class HeaderRowOptions
-    {
-        public bool UseHeaderNames { get; set; }
-
-        public string HeaderRowText { get; set; }
-
-        internal bool AddHeaderRow => UseHeaderNames || !string.IsNullOrEmpty(HeaderRowText);
     }
 }

@@ -19,7 +19,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(string), null);
+            var result = sut.Parse(typeof(string), null, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(default(string)));
@@ -32,7 +32,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(string), string.Empty);
+            var result = sut.Parse(typeof(string), string.Empty, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(string.Empty));
@@ -47,7 +47,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            var result = sut.Parse(typeof(string), cellValueAsString);
+            var result = sut.Parse(typeof(string), cellValueAsString, 1);
 
             //VALIDATE
             Assert.That(result, Is.EqualTo(cellValue));

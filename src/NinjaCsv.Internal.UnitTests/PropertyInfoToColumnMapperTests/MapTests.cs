@@ -93,6 +93,31 @@ namespace NinjaCsv.Internal.UnitTests.PropertyInfoToColumnMapperTests
             Assert.That(ex.Message, Is.EqualTo($"{propertyInfo.Name} has multiple {nameof(Column)} attributes"));
         }
 
+        [TestCase(0)]
+        [TestCase(100)]
+        [TestCase(1000)]
+        public void MultiplePropertiesHaveSameColumnNumber_ThrowsInvalidOperationException(int columnNumber)
+        {
+            //SETUP
+            var propertyInfo1 = _fixture.Create<UnitTestPropertyInfo>();
+            propertyInfo1.AddCustomAttribute(new Column(columnNumber));
+            var propertyName = _fixture.Create<string>();
+            propertyInfo1.CustomizeName(propertyName);
+
+            var propertyInfo2 = _fixture.Create<UnitTestPropertyInfo>();
+            propertyInfo2.AddCustomAttribute(new Column(columnNumber));
+            //var propertyName = _fixture.Create<string>();
+            propertyInfo2.CustomizeName(propertyName);
+            var sut = new PropertyInfoToColumnMapper();
+
+            //TEST
+            void TestDelegate() => sut.Map(new PropertyInfo[] { propertyInfo1, propertyInfo2 }, false).ToList();
+
+            //VALIDATE
+            var ex = Assert.Throws<InvalidOperationException>(TestDelegate);
+            Assert.That(ex.Message, Is.EqualTo($"Multiple properties are marked with column number {columnNumber}"));
+        }
+
         [Test]
         public void HasCustomColumnAttribute_ReturnsKvpListWithSingleItem()
         {

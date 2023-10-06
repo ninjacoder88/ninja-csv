@@ -21,7 +21,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            void TestDelegate() => sut.Parse(null, string.Empty);
+            void TestDelegate() => sut.Parse(null, string.Empty, 1);
 
             //VALIDATE
             Assert.Throws<ArgumentNullException>(TestDelegate);
@@ -35,7 +35,7 @@ namespace NinjaCsv.Internal.UnitTests.CellDataParserTests
             var sut = new CellDataParser();
 
             //TEST
-            void TestDelegate() => sut.Parse(typeof(UnitTestItem), cellData);
+            void TestDelegate() => sut.Parse(typeof(UnitTestItem), cellData, 1);
 
             //VALIDATE
             Assert.Throws<InvalidOperationException>(TestDelegate);

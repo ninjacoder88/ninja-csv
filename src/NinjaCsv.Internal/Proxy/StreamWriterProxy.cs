@@ -11,6 +11,12 @@ namespace NinjaCsv.Internal.Proxy
             _streamWriter = new StreamWriter(filePath);
         }
 
+        public StreamWriterProxy(MemoryStream memoryStream)
+        {
+            _streamWriter = new StreamWriter(memoryStream);
+            _memoryStream = memoryStream;
+        }
+
         public void Dispose()
         {
             Dispose(true);
@@ -33,12 +39,18 @@ namespace NinjaCsv.Internal.Proxy
                 return;
 
             if (disposing)
+            {
                 _streamWriter.Dispose();
+                if(_memoryStream != null)
+                    _memoryStream.Dispose();
+            }
+                
 
             _disposed = true;
         }
 
         private bool _disposed;
         private readonly StreamWriter _streamWriter;
+        private readonly MemoryStream _memoryStream;
     }
 }
