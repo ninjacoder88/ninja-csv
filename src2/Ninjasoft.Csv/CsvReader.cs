@@ -5,7 +5,14 @@ using System.IO;
 
 namespace Ninjasoft.Csv
 {
-    public class CsvReader
+    public interface ICsvReader
+    {
+        IEnumerable<T> Read<T>(StreamReader streamReader, Action<CsvReaderOptions> optionsConfig = null);
+
+        IEnumerable<T> Read<T>(string filePath, Action<CsvReaderOptions> optionsConfig = null);
+    }
+
+    public class CsvReader : ICsvReader
     {
         public CsvReader()
         {
